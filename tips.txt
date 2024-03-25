@@ -3,3 +3,4 @@ v_2=  installation  1)pip install djangorestframework
     ...
     'rest_framework',
 ]
+v3=Request((request.data)) just explain
