@@ -6,3 +6,5 @@ v_2=  installation  1)pip install djangorestframework
 v3=Request((request.data)) just explain
 v4= @api_view ( function base view)
 class base view
+v5=postman
+V6=REQUEST
