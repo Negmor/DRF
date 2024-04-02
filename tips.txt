@@ -9,3 +9,5 @@ class base view
 v5=postman
 V6=REQUEST
 v7=serializer
+V8=MAKE NEW OBJECT WITH API,send detail with api(whit uniqe parametr)
+

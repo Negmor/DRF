@@ -4,7 +4,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 import requests
 from django.contrib.auth.models import User
-from .serializers import UserSerializer
+from .serializers import UserSerializer, ArticleSerializer
+from .models  import Article
 
 # Create your views here.
 
@@ -51,7 +52,23 @@ class get_user(APIView):
 
     def get(self, request):
         # query set data taype
-        users = User.objects.all()
-        ser = UserSerializer(instance=users, many=True)
+        users = Article.objects.all()
+        ser = ArticleSerializer(instance=Article, many=True)
 
         return Response(ser.data)
+
+
+class ArticleListView(APIView):
+    def get(self, request):
+        article = Article.objects.all()
+        sery = ArticleSerializer(instance= article , many=True)
+
+        return Response(sery.data)
+
+
+class ArticleDetailView(APIView):
+    def get(self, request,pk):
+        INSTANSE = Article.objects.get(id=pk)
+        sery = ArticleSerializer(instance= INSTANSE)
+
+        return Response(sery.data)
