@@ -8,3 +8,4 @@ v4= @api_view ( function base view)
 class base view
 v5=postman
 V6=REQUEST
+v7=serializer
