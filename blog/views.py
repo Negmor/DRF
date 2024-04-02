@@ -72,3 +72,11 @@ class ArticleDetailView(APIView):
         sery = ArticleSerializer(instance= INSTANSE)
 
         return Response(sery.data)
+
+class ArticleaddView(APIView):
+        def post(self, request):
+            sery = ArticleSerializer(data=request.data)
+            if sery.is_valid():
+                sery.save()
+                return Response({"response":"done"})
+            return Response(sery.errors)
