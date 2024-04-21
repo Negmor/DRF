@@ -13,3 +13,4 @@ V8=MAKE NEW OBJECT WITH API,send detail with api(whit uniqe parametr)
 v9=add new object with api to dataset(saving instances)
 V10=-
 V11,v12=model serializer
+v13=write_only:dont show some information when you read it or read_only
