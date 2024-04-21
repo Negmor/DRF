@@ -6,6 +6,7 @@ import requests
 from django.contrib.auth.models import User
 from .serializers import UserSerializer, ArticleSerializer
 from .models  import Article
+from rest_framework import status
 
 # Create your views here.
 
@@ -78,8 +79,8 @@ class ArticleaddView(APIView):
             sery = ArticleSerializer(data=request.data)
             if sery.is_valid():
                 sery.save()
-                return Response({"response":"done"})
-            return Response(sery.errors)
+                return Response({"response":"done"},status=status.HTTP_201_CREATED)
+            return Response(sery.errors,status=400)
 
 
 class ArticleUpdateView(APIView):
