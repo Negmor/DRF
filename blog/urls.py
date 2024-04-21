@@ -10,5 +10,6 @@ urlpatterns = [
     path("article", views.ArticleListView.as_view()),
     path("article/<int:pk>", views.ArticleDetailView.as_view()),
     path("article/add", views.ArticleaddView.as_view()),
+    path("article/update/<int:pk>", views.ArticleUpdateView.as_view()),
 
 ]

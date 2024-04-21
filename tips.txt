@@ -14,3 +14,4 @@ v9=add new object with api to dataset(saving instances)
 V10=-
 V11,v12=model serializer
 v13=write_only:dont show some information when you read it or read_only
+v14=update& delete__just require filed updated so partial is true

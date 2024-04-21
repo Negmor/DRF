@@ -19,10 +19,10 @@ class UserSerializer(serializers.Serializer):
 
 
 class ArticleSerializer(serializers.ModelSerializer):
-    status=serializers.BooleanField(write_only=True)
+    #status=serializers.BooleanField(write_only=True)
     class Meta:
         model = Article
         fields = "__all__"
         # exclude=() tamami filed ha bejoz in filed jelosh minevisim
-        read_only_fileds=["id"]
+        #read_only_fileds=["id"]
 
