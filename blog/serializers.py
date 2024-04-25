@@ -18,11 +18,20 @@ class UserSerializer(serializers.Serializer):
         Article.objects.create(**validated_data)"""
 
 
+def check_title(value):
+    if value["title"] == "fofo":
+        raise serializers.ValidationError("this  name is not valid")
+    return value
+
+
 class ArticleSerializer(serializers.ModelSerializer):
     #status=serializers.BooleanField(write_only=True)
     class Meta:
         model = Article
         fields = ("id","title","text","status")
+        validators=[
+            check_title,
+        ]
         # exclude=() tamami filed ha bejoz in filed jelosh minevisim
         # read_only_fileds=["id"]
 

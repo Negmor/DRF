@@ -18,3 +18,4 @@ v14=update& delete__just require filed updated so partial is true
 v15=status code
 v_16=Validation data  1)filed level : in serializer -- (def validate_name of field)
 2)object level: validate(self, attrs):
+v_17=custom Validation data=class and model
