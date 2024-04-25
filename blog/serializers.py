@@ -22,7 +22,20 @@ class ArticleSerializer(serializers.ModelSerializer):
     #status=serializers.BooleanField(write_only=True)
     class Meta:
         model = Article
-        fields = "__all__"
+        fields = ("id","title","text","status")
         # exclude=() tamami filed ha bejoz in filed jelosh minevisim
-        #read_only_fileds=["id"]
+        # read_only_fileds=["id"]
+
+    def validate(self, attrs):
+        if attrs["title"]==attrs["text"]:
+            raise serializers.ValidationError("this  name is not valid")
+        return attrs
+
+
+    #def validate_title(self,value ): #call this filed with is valid in view--serializer.is_valid
+       #if value == "fofo":
+           #raise serializers.ValidationError("this  name is not valid")
+       #return value
+
+
 
