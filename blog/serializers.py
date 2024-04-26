@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import Article
 
-
 class UserSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=100)
     last_name = serializers.CharField(max_length=100)

@@ -3,9 +3,10 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import requests
+from rest_framework.authentication import  TokenAuthentication
 from django.contrib.auth.models import User
 from .serializers import UserSerializer, ArticleSerializer
-from .models  import Article
+from .models import Article
 from rest_framework import status
 
 # Create your views here.
@@ -62,39 +63,46 @@ class get_user(APIView):
 class ArticleListView(APIView):
     def get(self, request):
         article = Article.objects.all()
-        sery = ArticleSerializer(instance= article , many=True)
+        sery = ArticleSerializer(instance=article, many=True)
 
         return Response(sery.data)
 
 
 class ArticleDetailView(APIView):
-    def get(self, request,pk):
+    def get(self, request, pk):
         INSTANSE = Article.objects.get(id=pk)
-        sery = ArticleSerializer(instance= INSTANSE)
+        sery = ArticleSerializer(instance=INSTANSE)
 
         return Response(sery.data)
 
+
 class ArticleaddView(APIView):
-        def post(self, request):
-            sery = ArticleSerializer(data=request.data)
-            if sery.is_valid():
-                sery.save()
-                return Response({"response":"done"},status=status.HTTP_201_CREATED)
-            return Response(sery.errors,status=400)
+    def post(self, request):
+        sery = ArticleSerializer(data=request.data)
+        if sery.is_valid():
+            sery.save()
+            return Response({"response": "done"}, status=status.HTTP_201_CREATED)
+        return Response(sery.errors, status=400)
 
 
 class ArticleUpdateView(APIView):
-    def put(self,request,pk):
+    def put(self, request, pk):
         instance = Article.objects.get(id=pk)
-        serializer=ArticleSerializer(instance=instance,data=request.data,partial=True)
-        #sserializer.update()
+        serializer = ArticleSerializer(instance=instance, data=request.data, partial=True)
+        # sserializer.update()
         if serializer.is_valid():
             serializer.save()
             return Response({"response": "updated"})
         return Response(serializer.errors)
 
-    def delete(self,request,pk):
+    def delete(self, request, pk):
         instance = Article.objects.get(id=pk)
         instance.delete()
         return Response({"response": "deleted"})
 
+
+class CheckToken(APIView):
+    authentication_classes = [TokenAuthentication]
+    def get(self, request):
+        user = request.user
+        return Response({"user": user.username},status=status.HTTP_200_OK)
