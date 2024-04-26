@@ -21,3 +21,4 @@ v_16=Validation data  1)filed level : in serializer -- (def validate_name of fie
 v_17=custom Validation data=class and model
 v_18=custom Validation data=class
 v_19=Authentication:user "https://www.django-rest-framework.org/api-guide/authentication/"
+v_20=Authentication:resive token with api
