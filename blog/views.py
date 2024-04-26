@@ -76,10 +76,12 @@ class ArticleDetailView(APIView):
         return Response(sery.data)
 
 
-class ArticleaddView(APIView):
+class ArticleAddView(APIView):
     def post(self, request):
-        sery = ArticleSerializer(data=request.data)
+        sery = ArticleSerializer(data=request.data,context={"request":request})
         if sery.is_valid():
+            if request.user.is_authenticated:
+                sery.validated_data["user"] = request.user
             sery.save()
             return Response({"response": "done"}, status=status.HTTP_201_CREATED)
         return Response(sery.errors, status=400)

@@ -27,7 +27,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     #status=serializers.BooleanField(write_only=True)
     class Meta:
         model = Article
-        fields = ("id","title","text","status")
+        fields = ("id","title","text","status","user")
         validators=[
             check_title,
         ]
