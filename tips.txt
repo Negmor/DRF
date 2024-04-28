@@ -23,4 +23,4 @@ v_18=custom Validation data=class
 v_19=Authentication:user "https://www.django-rest-framework.org/api-guide/authentication/"
 v_20=Authentication:resive token with api
 v_21=Authentication:example  ___> save information with user
-v_22=permission:
+v_22= custom permission:

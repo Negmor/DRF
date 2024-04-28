@@ -3,6 +3,10 @@ from django.contrib.auth.models import  User
 
 # Create your models here.
 
+class BlockUser(models.Model):
+    username=models.CharField(max_length=50,unique=True)
+
+
 
 class Article(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name="articles",blank=True,null=True)

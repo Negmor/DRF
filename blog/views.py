@@ -3,13 +3,14 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import requests
-from rest_framework.authentication import  TokenAuthentication
+from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth.models import User
 from .serializers import UserSerializer, ArticleSerializer
 from .models import Article
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 # Create your views here.
+from .permission import BlocklistPermission
 
 url = "https://api.binance.com/api/v3/ticker/price??symbol=BTCUSDT"
 
@@ -77,10 +78,12 @@ class ArticleDetailView(APIView):
 
 
 class ArticleAddView(APIView):
-   #permission_classes = [IsAuthenticated]
-   #USE JUST FOR THIS VIEW
+    # permission_classes = [IsAuthenticated]
+    # USE JUST FOR THIS VIEW
+    permission_classes = [BlocklistPermission]
+
     def post(self, request):
-        sery = ArticleSerializer(data=request.data,context={"request":request})
+        sery = ArticleSerializer(data=request.data, context={"request": request})
         if sery.is_valid():
             if request.user.is_authenticated:
                 sery.validated_data["user"] = request.user
@@ -107,6 +110,7 @@ class ArticleUpdateView(APIView):
 
 class CheckToken(APIView):
     authentication_classes = [TokenAuthentication]
+
     def get(self, request):
         user = request.user
-        return Response({"user": user.username},status=status.HTTP_200_OK)
+        return Response({"user": user.username}, status=status.HTTP_200_OK)
