@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from .serializers import UserSerializer, ArticleSerializer
 from .models import Article
 from rest_framework import status
-
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
 url = "https://api.binance.com/api/v3/ticker/price??symbol=BTCUSDT"
@@ -77,6 +77,8 @@ class ArticleDetailView(APIView):
 
 
 class ArticleAddView(APIView):
+   #permission_classes = [IsAuthenticated]
+   #USE JUST FOR THIS VIEW
     def post(self, request):
         sery = ArticleSerializer(data=request.data,context={"request":request})
         if sery.is_valid():
