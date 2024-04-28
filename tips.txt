@@ -24,3 +24,4 @@ v_19=Authentication:user "https://www.django-rest-framework.org/api-guide/authen
 v_20=Authentication:resive token with api
 v_21=Authentication:example  ___> save information with user
 v_22= custom permission:
+v_23,24= custom permission:each use (object) has custom permission

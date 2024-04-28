@@ -10,7 +10,7 @@ from .models import Article
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 # Create your views here.
-from .permission import BlocklistPermission
+from .permission import BlocklistPermission, IsOwnerOrReadOnly
 
 url = "https://api.binance.com/api/v3/ticker/price??symbol=BTCUSDT"
 
@@ -93,8 +93,11 @@ class ArticleAddView(APIView):
 
 
 class ArticleUpdateView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def put(self, request, pk):
         instance = Article.objects.get(id=pk)
+        self.check_object_permissions(request, instance)
         serializer = ArticleSerializer(instance=instance, data=request.data, partial=True)
         # sserializer.update()
         if serializer.is_valid():
