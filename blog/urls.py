@@ -13,6 +13,7 @@ urlpatterns = [
     path("article/update/<int:pk>", views.ArticleUpdateView.as_view()),
     path("check", views.CheckToken.as_view()),
     path("login",  token_view.obtain_auth_token),
+    path("article/comments/<int:pk>", views.ArticleCommentView.as_view()),
 
 ]
 

@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import Article
+from .models import Article, Comment
+from django.utils.timezone import now
+
 
 class UserSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=100)
@@ -24,26 +26,35 @@ def check_title(value):
 
 
 class ArticleSerializer(serializers.ModelSerializer):
-    #status=serializers.BooleanField(write_only=True)
+    # status=serializers.BooleanField(write_only=True)
     class Meta:
         model = Article
-        fields = ("id","title","text","status","user")
-        validators=[
+        fields = ("id", "title", "text", "status", "user")
+        validators = [
             check_title,
         ]
         # exclude=() tamami filed ha bejoz in filed jelosh minevisim
         # read_only_fileds=["id"]
 
     def validate(self, attrs):
-        if attrs["title"]==attrs["text"]:
+        if attrs["title"] == attrs["text"]:
             raise serializers.ValidationError("this  name is not valid")
         return attrs
 
-
-    #def validate_title(self,value ): #call this filed with is valid in view--serializer.is_valid
-       #if value == "fofo":
-           #raise serializers.ValidationError("this  name is not valid")
-       #return value
-
+    # def validate_title(self,value ): #call this filed with is valid in view--serializer.is_valid
+    # if value == "fofo":
+    # raise serializers.ValidationError("this  name is not valid")
+    # return value
 
 
+# show day that passed from this comment
+class CommentSerializer(serializers.ModelSerializer):
+    days_ago = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Comment
+        fields = "__all__"
+        # or fields = ("","","days_ago")
+
+    def get_days_ago(self, obj):
+        return (now().date() - obj.date).days
