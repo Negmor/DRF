@@ -28,3 +28,5 @@ v_23,24= custom permission:each use (object) has custom permission
 v_24-25=Serializer fields:SerializerMethodField : change data after receive it and then show it //jalalidate(persian tools)
 v_26=Serializer fields:SerializerMethodField:1)send all things about model even its relatives model
 v_27=Serializer relations:show some thind about another serializer "SlugRelatedField()"
+v_28=JSON Web Token Authentication(JWT):djangorestframework-simplejwt pakage
+"https://django-rest-framework-simplejwt.readthedocs.io/en/latest/"

@@ -48,13 +48,13 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class ArticleSerializer(serializers.ModelSerializer):
     # status=serializers.BooleanField(write_only=True)
-    comments=serializers.SerializerMethodField()
+    #comments=serializers.SerializerMethodField()
     #user=serializers.SlugRelatedField(read_only=True,slug_field="username")
     user=serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Article
-        fields = ("id", "title", "text", "status", "user","comments")
+        fields = ("id", "title", "text", "status", "user")
         validators = [
             check_title,
         ]
