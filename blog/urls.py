@@ -14,6 +14,7 @@ urlpatterns = [
     path("check", views.CheckToken.as_view()),
     path("login",  token_view.obtain_auth_token),
     path("article/comments/<int:pk>", views.ArticleCommentView.as_view()),
+    path("users", views.UsereDetailView.as_view()),
 
 ]
 

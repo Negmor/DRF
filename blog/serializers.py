@@ -1,12 +1,17 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import Article, Comment
 from django.utils.timezone import now
 
 
-class UserSerializer(serializers.Serializer):
-    username = serializers.CharField(max_length=100)
-    last_name = serializers.CharField(max_length=100)
-    email = serializers.EmailField(max_length=30)
+class UserSerializer(serializers.ModelSerializer):
+    articles=serializers.PrimaryKeyRelatedField(read_only=True,many=True)
+
+    class Meta:
+        model=User
+
+        fields="__all__"
+
 
 
 """class ArticleSerializer(serializers.Serializer):
@@ -44,7 +49,8 @@ class CommentSerializer(serializers.ModelSerializer):
 class ArticleSerializer(serializers.ModelSerializer):
     # status=serializers.BooleanField(write_only=True)
     comments=serializers.SerializerMethodField()
-
+    #user=serializers.SlugRelatedField(read_only=True,slug_field="username")
+    user=serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Article

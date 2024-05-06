@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 import requests
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth.models import User
-from .serializers import UserSerializer, ArticleSerializer, CommentSerializer
+from .serializers import UserSerializer, ArticleSerializer, CommentSerializer,UserSerializer
 from .models import Article
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
@@ -125,3 +125,8 @@ class ArticleCommentView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+class UsereDetailView(APIView):
+    def get(self,request):
+        user=User.objects.all()
+        serializer = UserSerializer(instance=user,many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
