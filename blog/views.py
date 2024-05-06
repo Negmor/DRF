@@ -11,7 +11,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 from .permission import BlocklistPermission, IsOwnerOrReadOnly
-
+from rest_framework.viewsets import ViewSet
 url = "https://api.binance.com/api/v3/ticker/price??symbol=BTCUSDT"
 
 
@@ -129,4 +129,12 @@ class UsereDetailView(APIView):
     def get(self,request):
         user=User.objects.all()
         serializer = UserSerializer(instance=user,many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+class ArticleViewSet(ViewSet):
+    def list(self,request):
+        queryset=Article.objects.all()
+        serializer=ArticleSerializer(instance=queryset,many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

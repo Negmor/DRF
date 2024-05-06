@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from rest_framework.authtoken import views as token_view
-
+from rest_framework.routers import DefaultRouter
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -27,3 +27,6 @@ urlpatterns = [
 
 ]
 
+router = DefaultRouter()
+router.register(r'article/viewset', views.ArticleViewSet, basename='articles')
+urlpatterns += router.urls

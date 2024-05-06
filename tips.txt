@@ -30,3 +30,4 @@ v_26=Serializer fields:SerializerMethodField:1)send all things about model even 
 v_27=Serializer relations:show some thind about another serializer "SlugRelatedField()"
 v_28=JSON Web Token Authentication(JWT):djangorestframework-simplejwt pakage
 "https://django-rest-framework-simplejwt.readthedocs.io/en/latest/"
+v_29=ViewSets:use it makes your url a fewer than normal time
