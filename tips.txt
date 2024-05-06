@@ -31,3 +31,4 @@ v_27=Serializer relations:show some thind about another serializer "SlugRelatedF
 v_28=JSON Web Token Authentication(JWT):djangorestframework-simplejwt pakage
 "https://django-rest-framework-simplejwt.readthedocs.io/en/latest/"
 v_29=ViewSets:use it makes your url a fewer than normal time
+v_30=ViewSets:create,retrieve,update

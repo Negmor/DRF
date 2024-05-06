@@ -134,7 +134,31 @@ class UsereDetailView(APIView):
 
 
 class ArticleViewSet(ViewSet):
+    permission_classes = [IsAuthenticated]
     def list(self,request):
         queryset=Article.objects.all()
         serializer=ArticleSerializer(instance=queryset,many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def retrieve(self,request,pk=None):
+        instance = Article.objects.all()
+        serializer = ArticleSerializer(instance=instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def create(self,request):
+        sery = ArticleSerializer(data=request.data, context={"request": request})
+        if sery.is_valid():
+            sery.validated_data["user"] = request.user
+            sery.save()
+            return Response({"response": "done"}, status=status.HTTP_201_CREATED)
+        return Response(sery.errors, status=400)
+
+    def update(self,request,pk=None):
+        instance = Article.objects.get(id=pk)
+        self.check_object_permissions(request, instance)
+        serializer = ArticleSerializer(instance=instance, data=request.data, partial=True)
+        # sserializer.update()
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"response": "updated"})
+        return Response(serializer.errors)
