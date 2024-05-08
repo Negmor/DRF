@@ -13,7 +13,7 @@ from rest_framework.permissions import IsAuthenticated
 from .permission import BlocklistPermission, IsOwnerOrReadOnly
 from rest_framework.viewsets import ViewSet,ModelViewSet
 url = "https://api.binance.com/api/v3/ticker/price??symbol=BTCUSDT"
-
+from rest_framework.pagination import PageNumberPagination,LimitOffsetPagination
 
 # se can write here al list from decorators
 @api_view(["Get", "post"])
@@ -164,8 +164,15 @@ class UsereDetailView(APIView):
         return Response(serializer.errors)"""
 
 
-class ArticleViewSet(ModelViewSet):
+"""class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.all()
-    serializer_class = ArticleSerializer
+    serializer_class = ArticleSerializer"""
 
 
+class ArticleViewSet(APIView):
+    def get(self,request):
+        queryset = Article.objects.all()
+        paginator=PageNumberPagination()
+        result=paginator.paginate_queryset(queryset=queryset,request=requests)
+        serializer = ArticleSerializer(instance=result, many=True,context={"request": request})
+        return Response(serializer.data)
