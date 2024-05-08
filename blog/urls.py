@@ -29,7 +29,7 @@ urlpatterns = [
 
 ]
 
-"""router = DefaultRouter()
+router = DefaultRouter()
 router.register(r'article/viewset', views.ArticleViewSet, basename='articles')
-urlpatterns += router.urls"""
+urlpatterns += router.urls
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

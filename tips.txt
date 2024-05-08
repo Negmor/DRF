@@ -34,3 +34,4 @@ v_29=ViewSets:use it makes your url a fewer than normal time
 v_30=ViewSets:create,retrieve,update
 V_31=ModelViewSet
 v_32=add image
+v_33=Pagination:PageNumberPagination
