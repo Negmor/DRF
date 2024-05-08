@@ -1,3 +1,5 @@
+from DRF import settings
+from django.conf.urls.static import static
 from django.urls import path
 from . import views
 from rest_framework.authtoken import views as token_view
@@ -27,6 +29,7 @@ urlpatterns = [
 
 ]
 
-router = DefaultRouter()
+"""router = DefaultRouter()
 router.register(r'article/viewset', views.ArticleViewSet, basename='articles')
-urlpatterns += router.urls
+urlpatterns += router.urls"""
+urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

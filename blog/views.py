@@ -64,7 +64,7 @@ class get_user(APIView):
 class ArticleListView(APIView):
     def get(self, request):
         article = Article.objects.all()
-        sery = ArticleSerializer(instance=article, many=True)
+        sery = ArticleSerializer(instance=article, many=True,context={"request":request})
 
         return Response(sery.data)
 
@@ -167,3 +167,5 @@ class UsereDetailView(APIView):
 class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+
+

@@ -51,10 +51,11 @@ class ArticleSerializer(serializers.ModelSerializer):
     #comments=serializers.SerializerMethodField()
     #user=serializers.SlugRelatedField(read_only=True,slug_field="username")
     user=serializers.StringRelatedField(read_only=True)
+    image=serializers.SerializerMethodField()
 
     class Meta:
         model = Article
-        fields = ("id", "title", "text", "status", "user")
+        fields = ("id", "title", "text", "status", "user","image")
         validators = [
             check_title,
         ]
@@ -74,4 +75,10 @@ class ArticleSerializer(serializers.ModelSerializer):
     # raise serializers.ValidationError("this  name is not valid")
     # return value
 
+    def get_image(self,obj):
+        requests=self.context.get("request")
+        if obj.image :
+            image_url=obj.image.url
+            return requests.build_absolute_uri(image_url)
+        return None
 
